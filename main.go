@@ -23,40 +23,25 @@ func drawText(s tcell.Screen, x1, y1, x2, y2 int, style tcell.Style, text string
 	}
 }
 
-func drawBox(s tcell.Screen, x1, y1, x2, y2 int, style tcell.Style, text string) {
-	if y2 < y1 {
-		y1, y2 = y2, y1
-	}
-	if x2 < x1 {
-		x1, x2 = x2, x1
-	}
+func drawTable(s tcell.Screen, x int, y int, style tcell.Style) {
 
-	// Fill background
-	for row := y1; row <= y2; row++ {
-		for col := x1; col <= x2; col++ {
-			s.SetContent(col, row, ' ', nil, style)
-		}
-	}
+	// |
+	s.SetContent(x/2, y/2+0, tcell.RuneVLine, nil, style)
+	s.SetContent(x/2, y/2+1, tcell.RuneVLine, nil, style)
+	s.SetContent(x/2, y/2+2, tcell.RuneVLine, nil, style)
+	s.SetContent(x/2, y/2+3, tcell.RuneVLine, nil, style)
+	s.SetContent(x/2, y/2+4, tcell.RuneVLine, nil, style)
 
-	// Draw borders
-	for col := x1; col <= x2; col++ {
-		s.SetContent(col, y1, tcell.RuneHLine, nil, style)
-		s.SetContent(col, y2, tcell.RuneHLine, nil, style)
-	}
-	for row := y1 + 1; row < y2; row++ {
-		s.SetContent(x1, row, tcell.RuneVLine, nil, style)
-		s.SetContent(x2, row, tcell.RuneVLine, nil, style)
-	}
+	s.SetContent(x/2+5, y/2+0, tcell.RuneVLine, nil, style)
+	s.SetContent(x/2+5, y/2+1, tcell.RuneVLine, nil, style)
+	s.SetContent(x/2+5, y/2+2, tcell.RuneVLine, nil, style)
+	s.SetContent(x/2+5, y/2+3, tcell.RuneVLine, nil, style)
+	s.SetContent(x/2+5, y/2+4, tcell.RuneVLine, nil, style)
+	//s.SetContent(col, y2, tcell.RuneHLine, nil, style)
+}
 
-	// Only draw corners if necessary
-	if y1 != y2 && x1 != x2 {
-		s.SetContent(x1, y1, tcell.RuneULCorner, nil, style)
-		s.SetContent(x2, y1, tcell.RuneURCorner, nil, style)
-		s.SetContent(x1, y2, tcell.RuneLLCorner, nil, style)
-		s.SetContent(x2, y2, tcell.RuneLRCorner, nil, style)
-	}
+func drawBox(s tcell.Screen, x, y, x2, y2 int, style tcell.Style, text string) {
 
-	drawText(s, x1+1, y1+1, x2-1, y2-1, style, text)
 }
 
 func main() {
@@ -78,8 +63,10 @@ func main() {
 	s.Clear()
 
 	// Draw initial boxes
-	drawBox(s, 1, 1, 42, 7, boxStyle, "Click and drag to draw a box")
-	drawBox(s, 5, 9, 32, 14, boxStyle, "Press C to reset")
+	//drawBox(s, 1, 1, 42, 7, boxStyle, "Click and drag to draw a box")
+	//drawBox(s, 5, 9, 32, 14, boxStyle, "Press C to reset")
+	x, y := s.Size()
+	drawTable(s, x, y, boxStyle)
 
 	quit := func() {
 		// You have to catch panics in a defer, clean up, and
