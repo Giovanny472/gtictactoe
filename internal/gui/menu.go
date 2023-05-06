@@ -7,7 +7,7 @@ type menu struct {
 
 var me *menu
 
-func NewMenu() model.Scene {
+func NewMenu() model.Menu {
 	if me == nil {
 		me = &menu{}
 	}
