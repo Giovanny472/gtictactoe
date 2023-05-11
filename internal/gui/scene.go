@@ -1,6 +1,8 @@
 package gui
 
-import "github.com/Giovanny472/gtictactoe/model"
+import (
+	"github.com/Giovanny472/gtictactoe/model"
+)
 
 type scene struct {
 }
@@ -12,6 +14,14 @@ func NewScene() model.Scene {
 		sc = &scene{}
 	}
 	return sc
+}
+
+func (s *scene) Load() {
+
+}
+
+func (s *scene) loadBackground() {
+
 }
 
 func (s *scene) Show() {

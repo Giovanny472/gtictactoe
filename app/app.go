@@ -1,6 +1,9 @@
 package app
 
-import "github.com/Giovanny472/gtictactoe/model"
+import (
+	"github.com/Giovanny472/gtictactoe/internal/gui"
+	"github.com/Giovanny472/gtictactoe/model"
+)
 
 type app struct {
 }
@@ -17,4 +20,11 @@ func NewApp() model.App {
 
 func (a *app) Exec() {
 
+	menu := gui.MakeUI(model.TuiMenu)
+
+	// загрузка объектов
+	menu.Load()
+
+	// отображаем
+	menu.Show()
 }

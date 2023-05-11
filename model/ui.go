@@ -8,6 +8,7 @@ const (
 )
 
 type UI interface {
+	Load()
 	Show()
 }
 
